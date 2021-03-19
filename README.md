@@ -15,7 +15,8 @@ We will start with the truth table:
 * [TRUTH TABLE AND KARNAUGH MAP](https://drive.google.com/file/d/1gPH4mZrCixUy3W6Pi1fJNhL2tPR0WikG/view?usp=sharing)
 * [PROJECT](https://drive.google.com/drive/folders/1MTntKprojDt-urOsZBQNpYyAfofZkUb4?usp=sharing)
 * [FLOW CHART](https://drive.google.com/file/d/1tCjigInbWfjTFKXAZgkO-z9avnXBckFe/view?usp=sharing)
-*[report](https://drive.google.com/file/d/1-vri_qMBimfPCxmO7CJQ20pfPYbV8-5_/view?usp=sharing)
+* [REPORT](https://drive.google.com/file/d/1-vri_qMBimfPCxmO7CJQ20pfPYbV8-5_/view?usp=sharing)
+* [SIMULATION IN PROTEUS](https://drive.google.com/file/d/10vC2LMnGCbo_HByuJ310HvWX_y6fTfTz/view?usp=sharing) In this link you will find the simulations of the functions obtained in the Karnaugh maps in order to verify their performance.
 
 ## Hardware description
 *[PIC16F877A](https://www.microchip.com/wwwproducts/en/PIC16F877A)
