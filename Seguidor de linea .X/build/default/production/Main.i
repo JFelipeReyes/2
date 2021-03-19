@@ -1675,11 +1675,11 @@ INISYS:
     BCF STATUS,6 ;BK1
     BSF STATUS,5
 
-    BSF TRISC, 1 ;PORT (C0) S1 ENTRADA
-    BSF TRISC, 2 ;PORT (C1) S2 ENTRADA
-    BSF TRISC, 3 ;PORT (C2) S3 ENTRADA
-    BSF TRISC, 4 ;PORT (C3) S4 ENTRADA
-    BSF TRISC, 5 ;PORT (C4) S5 ENTRADA
+    BSF TRISC, 1 ;PORT (C1) S2 ENTRADA
+    BSF TRISC, 2 ;PORT (C2) S3 ENTRADA
+    BSF TRISC, 3 ;PORT (C3) S1 ENTRADA
+    BSF TRISC, 4 ;PORT (C4) S4 ENTRADA
+    BSF TRISC, 5 ;PORT (C5) S0 ENTRADA
     BCF TRISD, 0 ;PORT Testeo
     BCF TRISD, 1 ;PORT (D1) MA1 SALIDA
     BCF TRISD, 2 ;PORT (D2) MA2 SALIDA
@@ -1696,129 +1696,91 @@ INISYS:
     ; TESTEO
     BSF TRISD, 0
     ;
-    MOVF PORTC,1
-    MOVWF 0x25
+    MOVF PORTC,0 ;PORTC >>> W
+    MOVWF 0x25 ;PORTC >>> R25
 
-
-   ;R21 = S2
-    MOVWF 0x25
-    ANDLW 0b00000010
+    ;R21[0] = S2 (((PORTC) and 07Fh), 1)
+    ANDLW 0b00000010 ; Resultado esta en W
     MOVWF 0x26
-    RRF 0x26,1
-    MOVF 0x26,0
-    ANDLW 0b00000001
-    MOVWF 0x26
+    RRF 0x26,1 ; R26 = 0000 000(((PORTC) and 07Fh), 1)
 
-    ;R22 = !S2
-    MOVWF 0x25
-    ANDLW 0b00000010
-    MOVWF 0x27
-    RRF 0x27,1
-    COMF 0x27,0
-    MOVF 0x27,0
+    ;R27 = !S2
+    MOVF 0x26,0 ;R26 >>> W
+    MOVWF 0x27 ;W >>> R27
+    COMF 0x27,0 ;W ! R27
     ANDLW 0b00000001
     MOVWF 0x27
 
-    ;R23 = S3
-    MOVWF 0x25
+    ;R28[0] = S3
+    MOVF PORTC,0 ;PORTC >>> W
     ANDLW 0b00000100
     MOVWF 0x28
     RRF 0x28,1
-    RRF 0x28,1
-    MOVF 0x28,0
-    ANDLW 0b00000001
-    MOVWF 0x28
+    RRF 0x28,1 ;R28 = 0000 000(((PORTC) and 07Fh), 2)
 
-    ;R24 = !S3
-    MOVWF 0x25
-    ANDLW 0b00000100
-    MOVWF 0x29
-    RRF 0x29,1
-    RRF 0x29,1
-    COMF 0x29,0
-    MOVF 0x29,0
+    ;R29[0] = !S3
+    MOVF 0x28,0 ;R28 >>> W
+    MOVWF 0x29 ;W >>> R29
+    COMF 0x29,0 ;W ! R27
     ANDLW 0b00000001
     MOVWF 0x29
 
-    ;R25 = S1
-    MOVWF 0x25
+    ;R30[0] = S1
+    MOVF PORTC,0 ;PORTC >>> W
     ANDLW 0b00001000
     MOVWF 0x30
     RRF 0x30,1
     RRF 0x30,1
-    RRF 0x30,1
-    MOVF 0x30,0
-    ANDLW 0b00000001
-    MOVWF 0x30
+    RRF 0x30,1 ;R30 = 0000 000(((PORTC) and 07Fh), 3)
 
-    ;R26 = !S1
-    MOVWF 0x25
-    ANDLW 0b00001000
-    MOVWF 0x31
-    RRF 0x31,1
-    RRF 0x31,1
-    RRF 0x31,1
-    COMF 0x31,0
-    MOVF 0x31,0
+    ;R31[0] = !S1
+    MOVF 0x30,0 ;R30 >>> W
+    MOVWF 0x31 ;W >>> R31
+    COMF 0x31,0 ;W ! R31
     ANDLW 0b00000001
     MOVWF 0x31
 
-    ;R27 = S4
-    MOVWF 0x25
+    ;R32[0] = S4
+    MOVF PORTC,0 ;PORTC >>> W
     ANDLW 0b00010000
     MOVWF 0x32
     RRF 0x32,1
     RRF 0x32,1
     RRF 0x32,1
-    RRF 0x32,1
-    MOVF 0x32,0
-    ANDLW 0b00000001
-    MOVWF 0x32
+    RRF 0x32,1 ;R32 = 0000 000(((PORTC) and 07Fh), 4)
 
-    ;R28 = !S4
-    MOVWF 0x25
-    ANDLW 0b00010000
-    MOVWF 0x33
-    RRF 0x33,1
-    RRF 0x33,1
-    RRF 0x33,1
-    RRF 0x33,1
-    COMF 0x33,0
-    MOVF 0x33,0
+    ;R33[0] = !S4
+    MOVF 0x33,0 ;R33 >>> W
+    MOVWF 0x33 ;W >>> R33
+    COMF 0x33,0 ;W ! R33
     ANDLW 0b00000001
     MOVWF 0x33
 
-    ;R29 = S0
-    MOVWF 0x25
+    ;R34[0] = S0
+    MOVF PORTC,0 ;PORTC >>> W
     ANDLW 0b00100000
     MOVWF 0x34
     RRF 0x34,1
     RRF 0x34,1
     RRF 0x34,1
     RRF 0x34,1
-    RRF 0x34,1
-    MOVF 0x34,0
-    ANDLW 0b00000001
-    MOVWF 0x34
+    RRF 0x34,1 ;R34 = 0000 000(((PORTC) and 07Fh), 5)
 
-    ;R30 = !S0
-    MOVWF 0x25
-    ANDLW 0b00100000
-    MOVWF 0x35
-    RRF 0x35,1
-    RRF 0x35,1
-    RRF 0x35,1
-    RRF 0x35,1
-    RRF 0x35,1
-    COMF 0x35,0
-    MOVF 0x35,0
+    ;R35[0] = !S0
+    MOVF 0x34,0 ;R34 >>> W
+    MOVWF 0x35 ;W >>> R35
+    COMF 0x35,0 ;W ! R35
     ANDLW 0b00000001
     MOVWF 0x35
 
-    ; OPERACIONES AND PARA MI
+    ; OPERACIONES AND PARA SALIDA MI=!S1.S2 + !S1.S3 + !S0.s4
+    ; S1 = 30
+    ; !S1= 31
+    ; S2 = 26
+    ; !S2 = 27
 
     ; OPERATION R36 = !S1 * S2
-    MOVF 0x31,0
+    MOVF 0x31,0 ;W=R31
     ANDWF 0x26,0
     MOVWF 0x36
 
@@ -1832,238 +1794,13 @@ INISYS:
     ANDWF 0x32,0
     MOVF 0x38
 
-    ; OPERACIONES AND PARA MD
-
-    ; OPERATION R39 = S0 * !S4
-    MOVF 0x34,0
-    ANDWF 0x33,0
-    MOVWF 0x39
-
-    ; OPERATION R340 = S1 * !S3
-    MOVF 0x30,0
-    ANDWF 0x29,0
-    MOVWF 0x40
-
-    ; OPERATION R41 = !S1 * !S3
-    MOVF 0x31,0
-    ANDWF 0x29,0
-    MOVWF 0x41
-
-    ; OPERATION R42 = (!S1 * !S3) * S2
-    MOVF 0x41,0
-    ANDWF 0x26,0
-    MOVWF 0x42
-
-    ; OPERACIONES AND PARA RI
-
-    ; OPERATION R43 = !S4 * !S2
-    MOVF 0x33,0
-    ANDWF 0x27,0
-    MOVWF 0x43
-
- ; OPERACIONES AND PARA ((EECON1) and 07Fh), 0
-
- ; OPERATION R44 = !S0 * !S2
-    MOVF 0x35,0
-    ANDWF 0x27,0
-    MOVWF 0x44
-
-    ;OPERACIONES AND PARA LEFT
-
-    ;OPERATION R45 = !S4 * S1
-    MOVF 0x33,0
-    ANDWF 0x30,0
-    MOVWF 0x45
-
-    ;OPERATION R46 = (!S4 * S1) * !S3
-    MOVF 0x45,0
-    ANDWF 0x29,0
-    MOVWF 0x46
-
-    ;OPERATION R47 = !S0 * !S4
-    MOVF 0x35,0
-    ANDWF 0x33,0
-    MOVWF 0x47
-
-    ;OPERATION R48 = (!S0 * !S4) * !S1
-    MOVF 0x47,0
-    ANDWF 0x31,0
-    MOVWF 0x48
-
-    ;OPERATION R49 = ((!S0 * !S4) * !S1) * !S3
-    MOVF 0x43,0
-    ANDWF 0x29,0
-    MOVWF 0x49
-
-    ;OPERATION R50 = (((!S0 * !S4) * !S1) * !S3) * S2
-    MOVF 0x49,0
-    ANDWF 0x26,0
-    MOVWF 0x50
-
-    ;OPERATION R51 = S0 * !S4
-    MOVF 0x34,0
-    ANDWF 0x33,0
-    MOVWF 0x51
-
-    ;OPERATION R52 = (S0 * !S4) * !S1
-    MOVF 0x51,0
-    ANDWF 0x26,0
-    MOVWF 0x52
-
-    ;OPERATION R53 = ((S0 * !S4)!S1)!S3
-    MOVF 0x52,0
-    ANDWF 0x29,0
-    MOVWF 0x53
-
-    ;OPERATION R54 = (((S0 * !S4)!S1)!S3)*!S2
-    MOVF 0x53,0
-    ANDWF 0x27,0
-    MOVWF 0x54
-
-    ;OPERACIONES AND PARA STOP
-
-    ;OPERATION R55 = !SO * !S4
-    MOVF 0x35,0
-    ANDWF 0x33,0
-    MOVWF 0x55
-
-    ;OPERATION R56 = (!SO * !S4) * !S1
-    MOVF 0x55,0
-    ANDWF 0x31,0
-    MOVWF 0x56
-
-    ;OPERATION R57 = ((!SO * !S4) * !S1) * !S3
-    MOVF 0x56,0
-    ANDWF 0x29,0
-    MOVWF 0x57
-
-    ;OPERATION R58 = (((!SO * !S4) * !S1) * !S3) * !S2
-    MOVF 0x57,0
-    ANDWF 0x27,0
-    MOVWF 0x58
-
-    ;OPERATION R59 = S0 * S4
-    MOVF 0x34,0
-    ANDWF 0x32,0
-    MOVWF 0x59
-
-    ;OPERATION R60 = (S0 * S4) * S1
-    MOVF 0x59,0
-    ANDWF 0x30,0
-    MOVWF 0x60
-
-    ;OPERATION R61 = ((S0 * S4) * S1) * S3
-    MOVF 0x60,0
-    ANDWF 0x28,0
-    MOVWF 0x61
-
-    ;OPERATION R62 = (((S0 * S4) * S1) * S3) * S2
-    MOVF 0x61,0
-    ANDWF 0x26,0
-    MOVWF 0x62
-
-
-    ;OPERACIONES AND PARA RIGHT
-
-    ;OPERATION R63 = !S0 * !S1
-    MOVF 0x35,0
-    ANDWF 0x31,0
-    MOVWF 0x63
-
-    ;OPERATION R64 = (!S0 * !S1) * S3
-    MOVF 0x63,0
-    ANDWF 0x28,0
-    MOVWF 0x64
-
-    ;OPERATION R65 = !S0 * S4
-    MOVF 0x35,0
-    ANDWF 0x32,0
-    MOVWF 0x65
-
-    ;OPERATION R66 = (!S0 * S4) * !S1
-    MOVF 0x65,0
-    ANDWF 0x31,0
-    MOVWF 0x66
-
-    ;OPERATION R67 = ((!S0 * S4) * !S1) * !S3
-    MOVF 0x66,0
-    ANDWF 0x29,0
-    MOVWF 0x67
-
-    ;OPERATION R68 = (((!S0 * S4) * !S1) * !S3) * !S2
-    MOVF 0x67,0
-    ANDWF 0x27,0
-    MOVWF 0x68
-
-
     ;OPERACIONES OR PARA MI
 
     ;OPERATION R69 = !S1 *S2 + !S1 * S3
     MOVF 0x36,0
     IORWF 0x37,0
-    MOVWF 0x69
-
-    ;OPERATION R70 = (!S1 *S2 + !S1 * S3) + !S0 * S4
-    MOVF 0x69,0
     IORWF 0x38,0
-    MOVWF 0x70
-
-    ;OPERACIONES OR PARA MD
-
-    ;OPERATION R71 = S0 * !S4 + S1 * !S3
-    MOVF 0x39,0
-    IORWF 0x40,0
-    MOVWF 0x71
-
-    ;OPERATION R72 = (S0 * !S4 + S1 * !S3) + !S1 * !S3 * S2
-    MOVF 0x71,0
-    IORWF 0x42,0
-    MOVWF 0x72
-
-    ;OPERACIONES OR PARA RI
-
-    ;OPERATION R73 = S0 * !S4 + !S4 * !S2
-    MOVF 0x39,0
-    IORWF 0x43,0
-    MOVWF 0x73
-
- ;OPERACIONES OR PARA ((EECON1) and 07Fh), 0
-
-    ;OPERATION R74 = !S0 * !S2 + !S0 * S4
-    MOVF 0x44,0
-    IORWF 0x38,0
-    MOVWF 0x74
-
-    ;OPERACIONES OR PARA LEFT
-
-    ;OPERATION R75 = ((!S4 * S1) * !S3) + ((((!S0 * !S4) * !S1) * !S3) * S2)
-    MOVF 0x46,0
-    IORWF 0x50,0
-    MOVWF 0x75
-
-     ;OPERATION R76 = ((!S4 * S1) * !S3) + ((((!S0 * !S4) * !S1) * !S3) * S2) + ((((S0 * !S4)!S1)!S3)*!S2)
-    MOVF 0x75,0
-    IORWF 0x54,0
-    MOVWF 0x76
-
-    ;OPERACIONES OR PARA STOP
-
-    ;OPERATION R77 = ((((!SO * !S4) * !S1) * !S3) * !S2) + (((S0 * S4) * S1) * S3) * S2)
-    MOVF 0x58,0
-    IORWF 0x62,0
-    MOVWF 0x77
-
-    ;OPERACIONES OR PARA RIGHT
-
-    ;OPERATION R78 = ((!S0 * !S1) * S3) + ((((!S0 * !S4) * !S1) * !S3) * S2)
-    MOVF 0x64,0
-    IORWF 0x50,0
-    MOVWF 0x78
-
-    ;OPERATION R79 = (((!S0 * !S1) * S3) + (((!S0 * !S4) * !S1) * !S3)*S2) + ((((!S0 * S4) * !S1) * !S3) * !S2)
-    MOVF 0x78,0
-    IORWF 0x68,0
-    MOVWF 0x79
+    MOVWF 0x39
 
     ;ASIGNACION DE SALIDAS
     ; TESTEO
@@ -2071,7 +1808,7 @@ INISYS:
     ;
 
     ;MI:
-    BTFSC 0x70,0
+    BTFSC 0x39,0
     GOTO ONMI
     GOTO OFFMI
 
@@ -2080,7 +1817,7 @@ INISYS:
     GOTO MD
 
     OFFMI:
-    BSF PORTD,1
+    BCF PORTD,1
     GOTO MD
 
     ;MD:
