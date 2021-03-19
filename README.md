@@ -18,7 +18,7 @@ We will start with the truth table:
 * [REPORT](https://drive.google.com/file/d/1-vri_qMBimfPCxmO7CJQ20pfPYbV8-5_/view?usp=sharing)
 * [SIMULATION IN PROTEUS](https://drive.google.com/file/d/10vC2LMnGCbo_HByuJ310HvWX_y6fTfTz/view?usp=sharing) In this link you will find the simulations of the functions obtained in the Karnaugh maps in order to verify their performance.
 
-## Hardware descriptio
+## HARDWARE DESCRIPTION
 
 *[PIC16F877A](https://www.microchip.com/wwwproducts/en/PIC16F877A)
 * This MPU operates with the compiler [XC8](http://ww1.microchip.com/downloads/en/DeviceDoc/MPLAB_XC8_C_Compiler_User_Guide_for_PIC.pdf)of microchip
