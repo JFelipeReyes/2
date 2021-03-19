@@ -1,0 +1,462 @@
+%CMF
+# %PSECTS Section
+# For each object file, details of its psects are enumerated here.
+# The begining of the section is indicated by %PSECTS.  The first
+# line indicates the name of the first object file, e.g.
+#    $foo.obj
+# Each line that follows describes a psect in that object file, until
+# the next object file.  The lines that describe a psect have the
+# format:
+#    <psect name> <class name> <space> <link address> <load addresses> <length> <delta>
+# All addresses and the length are given in unqualified hexadecimal
+# in delta units.  Any other numeric values are decimal.
+%PSECTS
+$build/default/production/Main.o
+resetVec CODE 0 6D7 6D7 3 2
+code CODE 0 6DA 6DA 126 2
+udata_bank0 BANK0 1 20 20 2 1
+config CONFIG 4 2007 2007 1 2
+# %UNUSED Section
+# This section enumerates the unused ranges of each CLASS. Each entry
+# is described on a single line as follows:
+#    <class name> <range> <delta>
+# Addresses given in the range are in hexadecimal and units of delta.
+%UNUSED
+RAM 22-6F 1
+RAM A0-EF 1
+RAM 110-16F 1
+RAM 190-1EF 1
+BANK0 22-6F 1
+BANK1 A0-EF 1
+BANK2 110-16F 1
+BANK3 190-1EF 1
+CONST 0-6D6 2
+CONST 800-1FFF 2
+ENTRY 0-6D6 2
+ENTRY 800-1FFF 2
+IDLOC 2000-2003 2
+CODE 0-6D6 2
+CODE 800-1FFF 2
+SFR0 0-1F 1
+SFR1 80-9F 1
+SFR2 100-10F 1
+SFR3 180-18F 1
+COMMON 70-7F 1
+EEDATA 2100-21FF 2
+STRCODE 0-6D6 2
+STRCODE 800-1FFF 2
+STRING 0-6D6 2
+STRING 800-1FFF 2
+# %LINETAB Section
+# This section enumerates the file/line to address mappings.
+# The beginning of the section is indicated by %LINETAB.
+# The first line indicates the name of the first object file, e.g.
+#   $foo.obj
+# Each line that follows describes a single mapping until the next
+# object file.  Mappings have the following format:
+#    <address> <psect name> <class name> ><line number>:<file name>
+# The address is absolute and given given in unqualified hex 
+# in delta units of the psect. All mappings within an object file
+# are in ascending order of addresses.
+# All other numeric values are in decimal.
+%LINETAB
+$build/default/production/Main.o
+6D7 resetVec CODE >25:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6D7 resetVec CODE >26:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6D9 resetVec CODE >27:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6DA code CODE >31:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6DA code CODE >32:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6DB code CODE >33:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6DC code CODE >35:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6DD code CODE >36:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6DE code CODE >37:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6DF code CODE >38:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E0 code CODE >39:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E1 code CODE >41:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E2 code CODE >42:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E3 code CODE >43:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E4 code CODE >44:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E5 code CODE >45:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E6 code CODE >46:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E7 code CODE >47:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E8 code CODE >50:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E9 code CODE >52:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6E9 code CODE >53:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6EA code CODE >54:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6EB code CODE >58:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6EC code CODE >59:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6ED code CODE >60:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6EE code CODE >61:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6EF code CODE >62:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F0 code CODE >63:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F1 code CODE >64:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F2 code CODE >67:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F3 code CODE >68:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F4 code CODE >69:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F5 code CODE >70:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F6 code CODE >71:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F7 code CODE >72:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F8 code CODE >73:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6F9 code CODE >74:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6FA code CODE >77:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6FB code CODE >78:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6FC code CODE >79:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6FD code CODE >80:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6FE code CODE >81:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+6FF code CODE >82:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+700 code CODE >83:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+701 code CODE >84:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+702 code CODE >87:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+703 code CODE >88:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+704 code CODE >89:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+705 code CODE >90:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+706 code CODE >91:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+707 code CODE >92:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+708 code CODE >93:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+709 code CODE >94:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+70A code CODE >95:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+70B code CODE >98:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+70C code CODE >99:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+70D code CODE >100:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+70E code CODE >101:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+70F code CODE >102:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+710 code CODE >103:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+711 code CODE >104:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+712 code CODE >105:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+713 code CODE >106:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+714 code CODE >109:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+715 code CODE >110:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+716 code CODE >111:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+717 code CODE >112:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+718 code CODE >113:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+719 code CODE >114:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+71A code CODE >115:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+71B code CODE >116:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+71C code CODE >117:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+71D code CODE >118:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+71E code CODE >121:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+71F code CODE >122:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+720 code CODE >123:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+721 code CODE >124:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+722 code CODE >125:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+723 code CODE >126:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+724 code CODE >127:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+725 code CODE >128:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+726 code CODE >129:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+727 code CODE >130:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+728 code CODE >133:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+729 code CODE >134:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+72A code CODE >135:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+72B code CODE >136:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+72C code CODE >137:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+72D code CODE >138:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+72E code CODE >139:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+72F code CODE >140:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+730 code CODE >141:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+731 code CODE >142:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+732 code CODE >143:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+733 code CODE >146:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+734 code CODE >147:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+735 code CODE >148:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+736 code CODE >149:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+737 code CODE >150:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+738 code CODE >151:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+739 code CODE >152:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+73A code CODE >153:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+73B code CODE >154:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+73C code CODE >155:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+73D code CODE >156:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+73E code CODE >159:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+73F code CODE >160:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+740 code CODE >161:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+741 code CODE >162:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+742 code CODE >163:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+743 code CODE >164:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+744 code CODE >165:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+745 code CODE >166:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+746 code CODE >167:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+747 code CODE >168:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+748 code CODE >169:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+749 code CODE >170:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+74A code CODE >175:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+74B code CODE >176:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+74C code CODE >177:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+74D code CODE >180:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+74E code CODE >181:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+74F code CODE >182:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+750 code CODE >185:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+751 code CODE >186:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+752 code CODE >187:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+753 code CODE >192:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+754 code CODE >193:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+755 code CODE >194:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+756 code CODE >197:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+757 code CODE >198:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+758 code CODE >199:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+759 code CODE >202:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+75A code CODE >203:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+75B code CODE >204:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+75C code CODE >207:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+75D code CODE >208:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+75E code CODE >209:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+75F code CODE >214:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+760 code CODE >215:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+761 code CODE >216:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+762 code CODE >221:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+763 code CODE >222:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+764 code CODE >223:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+765 code CODE >228:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+766 code CODE >229:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+767 code CODE >230:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+768 code CODE >233:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+769 code CODE >234:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+76A code CODE >235:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+76B code CODE >238:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+76C code CODE >239:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+76D code CODE >240:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+76E code CODE >243:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+76F code CODE >244:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+770 code CODE >245:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+771 code CODE >248:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+772 code CODE >249:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+773 code CODE >250:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+774 code CODE >253:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+775 code CODE >254:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+776 code CODE >255:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+777 code CODE >258:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+778 code CODE >259:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+779 code CODE >260:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+77A code CODE >263:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+77B code CODE >264:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+77C code CODE >265:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+77D code CODE >268:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+77E code CODE >269:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+77F code CODE >270:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+780 code CODE >273:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+781 code CODE >274:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+782 code CODE >275:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+783 code CODE >280:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+784 code CODE >281:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+785 code CODE >282:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+786 code CODE >285:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+787 code CODE >286:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+788 code CODE >287:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+789 code CODE >290:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+78A code CODE >291:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+78B code CODE >292:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+78C code CODE >295:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+78D code CODE >296:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+78E code CODE >297:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+78F code CODE >300:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+790 code CODE >301:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+791 code CODE >302:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+792 code CODE >305:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+793 code CODE >306:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+794 code CODE >307:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+795 code CODE >310:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+796 code CODE >311:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+797 code CODE >312:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+798 code CODE >315:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+799 code CODE >316:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+79A code CODE >317:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+79B code CODE >323:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+79C code CODE >324:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+79D code CODE >325:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+79E code CODE >328:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+79F code CODE >329:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A0 code CODE >330:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A1 code CODE >333:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A2 code CODE >334:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A3 code CODE >335:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A4 code CODE >338:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A5 code CODE >339:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A6 code CODE >340:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A7 code CODE >343:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A8 code CODE >344:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7A9 code CODE >345:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7AA code CODE >348:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7AB code CODE >349:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7AC code CODE >350:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7AD code CODE >356:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7AE code CODE >357:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7AF code CODE >358:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B0 code CODE >361:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B1 code CODE >362:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B2 code CODE >363:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B3 code CODE >368:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B4 code CODE >369:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B5 code CODE >370:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B6 code CODE >373:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B7 code CODE >374:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B8 code CODE >375:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7B9 code CODE >380:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7BA code CODE >381:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7BB code CODE >382:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7BC code CODE >387:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7BD code CODE >388:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7BE code CODE >389:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7BF code CODE >394:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C0 code CODE >395:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C1 code CODE >396:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C2 code CODE >399:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C3 code CODE >400:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C4 code CODE >401:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C5 code CODE >406:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C6 code CODE >407:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C7 code CODE >408:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C8 code CODE >413:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7C9 code CODE >414:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7CA code CODE >415:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7CB code CODE >418:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7CC code CODE >419:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7CD code CODE >420:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7CE code CODE >424:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7CF code CODE >428:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D0 code CODE >429:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D1 code CODE >430:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D2 code CODE >432:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D2 code CODE >433:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D3 code CODE >434:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D4 code CODE >436:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D4 code CODE >437:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D5 code CODE >438:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D6 code CODE >441:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D6 code CODE >442:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D7 code CODE >443:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D8 code CODE >444:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D9 code CODE >446:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7D9 code CODE >447:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DA code CODE >448:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DB code CODE >450:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DB code CODE >451:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DC code CODE >452:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DD code CODE >455:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DD code CODE >456:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DE code CODE >457:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7DF code CODE >458:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E0 code CODE >460:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E0 code CODE >461:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E1 code CODE >462:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E2 code CODE >464:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E2 code CODE >465:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E3 code CODE >466:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E4 code CODE >470:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E4 code CODE >471:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E5 code CODE >472:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E6 code CODE >473:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E7 code CODE >475:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E7 code CODE >476:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E8 code CODE >477:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E9 code CODE >479:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7E9 code CODE >480:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7EA code CODE >481:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7EB code CODE >485:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7EB code CODE >486:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7EC code CODE >487:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7ED code CODE >488:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7EE code CODE >490:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7EE code CODE >491:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7EF code CODE >492:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F0 code CODE >494:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F0 code CODE >495:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F1 code CODE >496:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F2 code CODE >499:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F2 code CODE >500:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F3 code CODE >501:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F4 code CODE >502:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F5 code CODE >504:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F5 code CODE >505:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F6 code CODE >506:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F7 code CODE >508:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F7 code CODE >509:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F8 code CODE >510:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F9 code CODE >513:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7F9 code CODE >514:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FA code CODE >515:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FB code CODE >516:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FC code CODE >518:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FC code CODE >519:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FD code CODE >520:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FE code CODE >522:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FE code CODE >523:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+7FF code CODE >524:/root/MPLABXProjects/Seguidor de linea .X/Main.s
+# %SYMTAB Section
+# An enumeration of all symbols in the program.
+# The beginning of the section is indicated by %SYMTAB.
+# Each line describes a single symbol as follows:
+#    <label> <value> [-]<load-adj> <class> <space> <psect> <file-name>
+# The value and load-adj are both in unqualified hexadecimal.
+# All other numeric values are in decimal.  The load-adj is the
+# quantity one needs to add to the symbol value in order to obtain the load
+# address of the symbol.  This value may be signed. If the symbol
+# was defined in a psect then <psect> will be "-". File-name
+# is the name of the object file in which the symbol was defined.
+%SYMTAB
+__Hspace_0 800 0 ABS 0 - -
+__Hspace_1 22 0 ABS 0 - -
+__Hspace_3 0 0 ABS 0 - -
+__Hspace_4 400F 0 ABS 0 - -
+__Hudata_bank0 0 0 ABS 0 udata_bank0 -
+__Hudata_bank1 0 0 ABS 0 udata_bank1 -
+__Hudata_bank2 0 0 ABS 0 udata_bank2 -
+__Hudata_bank3 0 0 ABS 0 udata_bank3 -
+__LresetVec 0 0 ABS 0 resetVec -
+__HresetVec 0 0 ABS 0 resetVec -
+__Hedata 0 0 ABS 0 edata -
+__Hudata 0 0 ABS 0 udata -
+__Hconfig 4010 0 CONFIG 4 config -
+__Ledata 0 0 ABS 0 edata -
+__Ludata 0 0 ABS 0 udata -
+__Hcode 0 0 ABS 0 code -
+__Hdata 0 0 ABS 0 data -
+__Lcode 0 0 ABS 0 code -
+__Ldata 0 0 ABS 0 data -
+__S0 800 0 ABS 0 - -
+__S1 22 0 ABS 0 - -
+__S3 0 0 ABS 0 - -
+__Lconfig 0 0 CONFIG 4 config -
+__Lspace_0 0 0 ABS 0 - -
+__Lspace_1 0 0 ABS 0 - -
+__Lspace_3 0 0 ABS 0 - -
+__Lspace_4 0 0 ABS 0 - -
+__Ludata_bank0 0 0 ABS 0 udata_bank0 -
+__Ludata_bank1 0 0 ABS 0 udata_bank1 -
+__Ludata_bank2 0 0 ABS 0 udata_bank2 -
+__Ludata_bank3 0 0 ABS 0 udata_bank3 -
+__Hudata_shr 0 0 ABS 0 udata_shr -
+__Ludata_shr 0 0 ABS 0 udata_shr -
+# %SPLITSTAB Section
+# This section enumerates all the psect splits performed by the assembler.
+# The beginning of the section is indicated by %SPLITSTAB.
+# Each line is a record a particular split, where the parent psect is on
+# the left and the child on the right.  Note that a child psect is always
+# split form the top of the parent psect. All splits from a given parent
+# are listed in the order in which they occurred.
+%SPLITSTAB
+# %DABS Section
+# This section contains a table of all usuage of the assember
+# directive DABS in the program. Each line has the following format:
+#   <name> <space> <address> <size>
+# If the DABS was originally labelled then that shall be <name>,
+# otherwise name will be "-".  The <space> number is in decimal.
+# <address> and <size> are in byte units as unqaulified hexadecimal
+%DABS
+# %SEGMENTS Section
+# This sections enumerates the segments of the program.  Each segment
+# is described on a single line as follows:
+#    <name> <space> <link address> <file address> <size> <delta>
+# Addresses and size are in unqualified hexadecimal.  The link address
+# and size are in units of delta. The file address is in units of bytes.
+# All other numeric quantities are in decimal.
+%SEGMENTS
+resetVec 0 6D7 DAE 3 2
+code 0 6DA DB4 126 2
+udata_bank0 1 20 20 2 1
+# %NOTES Section
+# This section contains data of all the note-psects.  The beginning of the section
+# is indicated by %NOTES. The first line indicates the name and decimal
+# byte-length of the first note-psect, e.g.
+#   $codecov_info_hdr 16
+# Each line that follows contains the byte-data of the psect in hexadecimal as a
+# space-separated list. These lines are limited to 16 bytes of data.
+%NOTES
