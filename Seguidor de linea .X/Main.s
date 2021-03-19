@@ -42,9 +42,9 @@ INISYS:
     BCF TRISD, 2 ;PORT (D2) MD SALIDA
     BCF TRISD, 3 ;PORT (D3) RI SALIDA
     BCF TRISD, 4 ;PORT (D4) RD SALIDA
-    BCF TRISD, 5 ;PORT (D5) LEFT SALIDA
+    BCF TRISD, 5 ;PORT (D5) RIGHT SALIDA
     BCF TRISD, 6 ;PORT (D6) STOP SALIDA
-    BCF TRISD, 7 ;PORT (D7) RIGHT SALIDA
+    BCF TRISD, 7 ;PORT (D7) LEFT SALIDA
     ;*************************
     BCF STATUS, 5 ; BK0
     CLRF PORTD
@@ -54,16 +54,16 @@ INISYS:
     BSF TRISD, 0
     ;
     MOVF PORTC,0    ;PORTC >>> W
-    MOVWF 0x25	    ;PORTC >>> R25
+    MOVWF 0x25    ;PORTC >>> R25
 
     ;R21[0] = S2 (RC1)
     ANDLW 0b00000010 ; Resultado esta en W
     MOVWF 0x26
-    RRF 0x26,1		; R26 = 0000 000(RC1)
+    RRF 0x26,1 ; R26 = 0000 000(RC1)
 
     ;R27 = !S2
-    MOVF 0x26,0	    ;R26 >>> W
-    MOVWF 0x27	    ;W >>> R27
+    MOVF 0x26,0    ;R26 >>> W
+    MOVWF 0x27    ;W >>> R27
     COMF  0x27,0    ;W ! R27
     ANDLW 0b00000001
     MOVWF 0x27
@@ -73,11 +73,11 @@ INISYS:
     ANDLW 0b00000100
     MOVWF 0x28
     RRF 0x28,1
-    RRF 0x28,1	    ;R28 = 0000 000(RC2)
+    RRF 0x28,1    ;R28 = 0000 000(RC2)
 
     ;R29[0] = !S3
-    MOVF 0x28,0	    ;R28 >>> W
-    MOVWF 0x29	    ;W >>> R29
+    MOVF 0x28,0    ;R28 >>> W
+    MOVWF 0x29    ;W >>> R29
     COMF  0x29,0    ;W ! R27
     ANDLW 0b00000001
     MOVWF 0x29
@@ -88,11 +88,11 @@ INISYS:
     MOVWF 0x30
     RRF 0x30,1
     RRF 0x30,1
-    RRF 0x30,1	    ;R30 = 0000 000(RC3)
+    RRF 0x30,1    ;R30 = 0000 000(RC3)
 
     ;R31[0] = !S1
-    MOVF 0x30,0	    ;R30 >>> W
-    MOVWF 0x31	    ;W >>> R31
+    MOVF 0x30,0    ;R30 >>> W
+    MOVWF 0x31    ;W >>> R31
     COMF  0x31,0    ;W ! R31
     ANDLW 0b00000001
     MOVWF 0x31
@@ -104,11 +104,11 @@ INISYS:
     RRF 0x32,1
     RRF 0x32,1
     RRF 0x32,1
-    RRF 0x32,1	    ;R32 = 0000 000(RC4)
+    RRF 0x32,1    ;R32 = 0000 000(RC4)
 
     ;R33[0] = !S4
-    MOVF 0x33,0	    ;R33 >>> W
-    MOVWF 0x33	    ;W >>> R33
+    MOVF 0x33,0    ;R33 >>> W
+    MOVWF 0x33    ;W >>> R33
     COMF  0x33,0    ;W ! R33
     ANDLW 0b00000001
     MOVWF 0x33
@@ -121,42 +121,246 @@ INISYS:
     RRF 0x34,1
     RRF 0x34,1
     RRF 0x34,1
-    RRF 0x34,1	    ;R34 = 0000 000(RC5)
+    RRF 0x34,1    ;R34 = 0000 000(RC5)
 
     ;R35[0] = !S0
-    MOVF 0x34,0	    ;R34 >>> W
-    MOVWF 0x35	    ;W >>> R35
+    MOVF 0x34,0    ;R34 >>> W
+    MOVWF 0x35    ;W >>> R35
     COMF  0x35,0    ;W ! R35
     ANDLW 0b00000001
     MOVWF 0x35
 
-    ; OPERACIONES AND PARA SALIDA MI = S1'.S2 + S1'.S3 + S0'.S4
-    
-    ; OPERATION R36 = S1'.S2
-    MOVF 0x31,0		  
+    ; OPERACIONES AND PARA SALIDA MI=!S1.S2 + !S1.S3 + !S0.s4
+    ; S1 = 30
+    ; !S1= 31
+    ; S2 = 26
+    ; !S2 = 27
+   
+    ; OPERATION R36 = !S1 * S2
+    MOVF 0x31,0 ;W=R31  
     ANDWF 0x26,0
     MOVWF 0x36
 
-    ; OPERATION R37 = S1'.S3
+    ; OPERATION R37 = !S1 * S3
     MOVF 0x31,0
     ANDWF 0x28,0
     MOVWF 0x37
 
-    ; OPERATION R38 = S0'.S4
+    ; OPERATION R38 = !S0 * S4
     MOVF 0x35,0
     ANDWF 0x32,0
     MOVF 0x38
 
     ;OPERACIONES OR PARA MI
 
-    ;OPERATION R39 = S1'.S2 + S1'.S3 + S0'.S4
+    ;OPERATION R69 = !S1 *S2 + !S1 * S3
     MOVF 0x36,0
     IORWF 0x37,0
     IORWF 0x38,0
     MOVWF 0x39
-    
-    ;ASIGNACION DE SALIDA PARA MI
-    
+   
+    ;///////////////////////////////////////////////////////////////////////////////
+   
+    ; OPERACIONES AND PARA SALIDA MD = S0.S4' + S1.S3' + S1'.S3'.S2
+   
+    ; OPERATION R40 = S0.S4'
+    MOVF 0x34,0  
+    ANDWF 0x33,0
+    MOVWF 0x40
+   
+    ; OPERATION R41 = S1.S3'
+    MOVF 0x30,0  
+    ANDWF 0x29,0
+    MOVWF 0x41
+   
+    ; OPERATION R42 = S1'.S3'
+    MOVF 0x31,0  
+    ANDWF 0x29,0
+    MOVWF 0x42
+   
+    ; OPERATION R43 = S1'.S3'.S2
+    MOVF 0x42,0  
+    ANDWF 0x26,0
+    MOVWF 0x43
+   
+    ;OPERACIONES OR PARA MD
+
+    ;OPERATION R44 = S0.S4' + S1.S3' + S1'.S3'.S2
+    MOVF 0x40,0
+    IORWF 0x41,0
+    IORWF 0x43,0
+    MOVWF 0x44
+   
+    ;///////////////////////////////////////////////////////////////////////////////
+
+    ;OPERACIONES AND PARA SALIDA RI =  S0.S4' + S4.S2'  
+   
+    ; OPERATION R45 = S4'.S2'
+    MOVF 0x33,0  
+    ANDWF 0x27,0
+    MOVWF 0x45
+   
+    ;OPERACIONES OR PARA RI
+
+    ;OPERATION R46 = S0.S4' + S4'.S2'
+    MOVF 0x40,0
+    IORWF 0x45,0
+    MOVWF 0x46
+   
+    ;///////////////////////////////////////////////////////////////////////////////
+
+    ;OPERACIONES AND PARA SALIDA RD = S0'.S2' + S0'.S4
+   
+    ; OPERATION R47 = S0'.S2'
+    MOVF 0x35,0  
+    ANDWF 0x27,0
+    MOVWF 0x47
+   
+    ;OPERACIONES OR PARA RD
+
+    ;OPERATION R71 = S0'.S2' + S0'.S4
+    MOVF 0x47,0
+    IORWF 0x38,0
+    MOVWF 0x71
+   
+    ;///////////////////////////////////////////////////////////////////////////////
+   
+    ;OPERACIONES AND PARA SALIDA LEFT = S4'.S1.S3' + S0'.S4'.S1'.S3'.S2 + S0.S4'.S1'.S3'.S2'
+   
+    ; OPERATION R48 = S4'.S1
+    MOVF 0x33,0  
+    ANDWF 0x30,0
+    MOVWF 0x48
+   
+    ;OPERATION R49 = S4'.S1.S3'
+    MOVF 0x48,0  
+    ANDWF 0x29,0
+    MOVWF 0x49
+   
+   ;OPERATION R50 = S0'.S4'
+    MOVF 0x35,0  
+    ANDWF 0x33,0
+    MOVWF 0x50
+   
+    ;OPERATION R51 = S0'.S4'.S1'
+    MOVF 0x50,0  
+    ANDWF 0x31,0
+    MOVWF 0x51
+   
+    ;OPERATION R52 = S0'.S4'.S1'.S3'
+    MOVF 0x51,0  
+    ANDWF 0x29,0
+    MOVWF 0x52
+   
+    ;OPERATION R53 = S0'.S4'.S1'.S3'.S2
+    MOVF 0x52,0  
+    ANDWF 0x26,0
+    MOVWF 0x53
+   
+    ;OPERATION R54 = S0.S4'
+    MOVF 0x34,0  
+    ANDWF 0x33,0
+    MOVWF 0x54
+   
+    ;OPERATION R55 = S0.S4'.S1'
+    MOVF 0x54,0  
+    ANDWF 0x31,0
+    MOVWF 0x55
+   
+    ;OPERATION R56 = S0.S4'.S1'.S3'
+    MOVF 0x55,0  
+    ANDWF 0x29,0
+    MOVWF 0x56
+   
+    ;OPERATION R57 = S0.S4'.S1'.S3'.S2'
+    MOVF 0x56,0  
+    ANDWF 0x27,0
+    MOVWF 0x57
+   
+    ;OPERACIONES OR PARA LEFT
+
+    ;OPERATION R58 = S4'.S1.S3' + S0'.S4'.S1'.S3'.S2 + S0.S4'.S1'.S3'.S2'
+    MOVF 0x49,0
+    IORWF 0x53,0
+    IORWF 0x57,0
+    MOVWF 0x58
+    ;///////////////////////////////////////////////////////////////////////////////
+   
+    ;OPERACIONES AND PARA SALIDA STOP = S0'.S4'.S1'.S3'.S2' + S0.S4.S1.S3.S2
+   
+    ;OPERATION R59 = S0'.S4'.S1'.S3'.S2'
+    MOVF 0x52,0  
+    ANDWF 0x27,0
+    MOVWF 0x59
+   
+    ;OPERATION R60 = S0.S4
+    MOVF 0x34,0  
+    ANDWF 0x32,0
+    MOVWF 0x60
+   
+    ;OPERATION R61 = S0.S4.S1
+    MOVF 0x60,0  
+    ANDWF 0x30,0
+    MOVWF 0x61
+   
+    ;OPERATION R62 = S0.S4.S1.S3
+    MOVF 0x61,0  
+    ANDWF 0x28,0
+    MOVWF 0x62
+   
+    ;OPERATION R63 = S0.S4.S1.S3.S2
+    MOVF 0x62,0  
+    ANDWF 0x26,0
+    MOVWF 0x63
+   
+    ;OPERACIONES OR PARA STOP
+
+    ;OPERATION R58 = S0'.S4'.S1'.S3'.S2' + S0.S4.S1.S3.S2
+    MOVF 0x59,0
+    IORWF 0x63,0
+    MOVWF 0x64
+    ;///////////////////////////////////////////////////////////////////////////////
+   
+;OPERACIONES AND PARA SALIDA RIGHT = S0'.S1'.S3 + S0'.S4'.S1'.S3'.S2 + S0'.S4.S1'.S3'.S2'
+   
+    ;OPERATION R65 = S0'.S1'
+    MOVF 0x35,0  
+    ANDWF 0x31,0
+    MOVWF 0x65
+   
+    ;OPERATION R66 = S0'.S1'.S3
+    MOVF 0x65,0  
+    ANDWF 0x28,0
+    MOVWF 0x66
+   
+    ;OPERATION R67 = S0'.S4.S1'
+    MOVF 0x38,0  
+    ANDWF 0x31,0
+    MOVWF 0x67
+   
+    ;OPERATION R68 = S0'.S4.S1'.S3'
+    MOVF 0x67,0  
+    ANDWF 0x29,0
+    MOVWF 0x68
+   
+    ;OPERATION R69 = S0'.S4.S1'.S3'.S2
+    MOVF 0x68,0  
+    ANDWF 0x26,0
+    MOVWF 0x69
+   
+    ;OPERACIONES OR PARA RIGHT
+
+    ;OPERATION R70 = S0'.S1'.S3 + S0'.S4'.S1'.S3'.S2 + S0'.S4.S1'.S3'.S2'
+    MOVF 0x66,0
+    IORWF 0x53,0
+    IORWF 0x69,0
+    MOVWF 0x70
+
+    ;ASIGNACION DE SALIDAS
+    ; TESTEO
+    BCF TRISD, 0
+    ;
+
     ;MI:
     BTFSC 0x39,0
     GOTO ONMI
@@ -169,41 +373,8 @@ INISYS:
     OFFMI:
     BCF PORTD,1
     GOTO MD
-    
-;///////////////////////////////////////////////////////////////////////////////
-    
-    ; OPERACIONES AND PARA SALIDA MD = S0.S4' + S1.S3' + S1'.S3'.S2
-    
-    ; OPERATION R40 = S0.S4'
-    MOVF 0x34,0		  
-    ANDWF 0x23,0
-    MOVWF 0x40
-    
-    ; OPERATION R41 = S1.S3'
-    MOVF 0x30,0		  
-    ANDWF 0x29,0
-    MOVWF 0x41
-    
-    ; OPERATION R42 = S1'.S3'
-    MOVF 0x31,0		  
-    ANDWF 0x29,0
-    MOVWF 0x42
-    
-    ; OPERATION R43 = S1'.S3'.S2
-    MOVF 0x42,0		  
-    ANDWF 0x26,0
-    MOVWF 0x43
-    
-    ;OPERACIONES OR PARA MD
 
-    ;OPERATION R44 = S0.S4' + S1.S3' + S1'.S3'.S2
-    MOVF 0x40,0
-    IORWF 0x41,0
-    IORWF 0x43,0
-    MOVWF 0x44
-    
-    ;ASIGNACION DE SALIDA PARA MD
-    
+    ;MD:
     MD:
     BTFSC 0x44,0
     GOTO ONMD
@@ -216,25 +387,8 @@ INISYS:
     OFFMD:
     BCF PORTD,2
     GOTO RI
-    
-;///////////////////////////////////////////////////////////////////////////////
 
-    ;OPERACIONES AND PARA SALIDA RI =  S0.S4' + S4.S2'  
-    
-    ; OPERATION R45 = S4'.S2'
-    MOVF 0x33,0		  
-    ANDWF 0x27,0
-    MOVWF 0x45
-    
-    ;OPERACIONES OR PARA RI
-
-    ;OPERATION R46 = S0.S4' + S4'.S2'
-    MOVF 0x40,0
-    IORWF 0x45,0
-    MOVWF 0x46
-    
-    ;ASIGNACION DE SALIDA PARA RI
-    
+    ;RI:
     RI:
     BTFSC 0x46,0
     GOTO ONRI
@@ -247,153 +401,37 @@ INISYS:
     OFFRI:
     BCF PORTD,3
     GOTO BKR
-    
-;///////////////////////////////////////////////////////////////////////////////
 
-    ;OPERACIONES AND PARA SALIDA RD = S0'.S2' + S0'.S4
-    
-    ; OPERATION R47 = S0'.S2'
-    MOVF 0x35,0		  
-    ANDWF 0x27,0
-    MOVWF 0x47
-    
-    ;OPERACIONES OR PARA MD
-
-    ;OPERATION R48 = S0'.S2' + S0'.S4
-    MOVF 0x47,0
-    IORWF 0x38,0
-    MOVWF 0x48
-
-    ;ASIGNACION DE SALIDA PARA RD
-    
+    ;RD
     BKR:
-    BTFSC 0x48,0
+    BTFSC 0x71,0
     GOTO ONRD
     GOTO OFFRD
-    
+
     ONRD:
     BSF PORTD,4
-    GOTO LEFT
+    GOTO RIGHT
 
     OFFRD:
     BCF PORTD,4
-    GOTO LEFT
-    
-;///////////////////////////////////////////////////////////////////////////////
-    
-    ;OPERACIONES AND PARA SALIDA LEFT = S4'.S1.S3' + S0'.S4'.S1'.S3'.S2 + S0.S4'.S1'.S3'.S2'
-    
-    ; OPERATION R48 = S4'.S1
-    MOVF 0x33,0		  
-    ANDWF 0x30,0
-    MOVWF 0x48
-    
-    ;OPERATION R49 = S4'.S1.S3'
-    MOVF 0x48,0		  
-    ANDWF 0x29,0
-    MOVWF 0x49
-   
-   ;OPERATION R50 = S0'.S4'
-    MOVF 0x35,0		  
-    ANDWF 0x33,0
-    MOVWF 0x50
-    
-    ;OPERATION R51 = S0'.S4'.S1'
-    MOVF 0x50,0		  
-    ANDWF 0x31,0
-    MOVWF 0x51
-    
-    ;OPERATION R52 = S0'.S4'.S1'.S3'
-    MOVF 0x51,0		  
-    ANDWF 0x29,0
-    MOVWF 0x52
-    
-    ;OPERATION R53 = S0'.S4'.S1'.S3'.S2
-    MOVF 0x52,0		  
-    ANDWF 0x26,0
-    MOVWF 0x53
-    
-    ;OPERATION R54 = S0.S4'
-    MOVF 0x34,0		  
-    ANDWF 0x33,0
-    MOVWF 0x54
-    
-    ;OPERATION R55 = S0.S4'.S1'
-    MOVF 0x54,0		  
-    ANDWF 0x31,0
-    MOVWF 0x55
-    
-    ;OPERATION R56 = S0.S4'.S1'.S3'
-    MOVF 0x55,0		  
-    ANDWF 0x29,0
-    MOVWF 0x56
-    
-    ;OPERATION R57 = S0.S4'.S1'.S3'.S2'
-    MOVF 0x56,0		  
-    ANDWF 0x27,0
-    MOVWF 0x57
-    
-    ;OPERACIONES OR PARA LEFT
+    GOTO RIGHT
 
-    ;OPERATION R58 = S4'.S1.S3' + S0'.S4'.S1'.S3'.S2 + S0.S4'.S1'.S3'.S2'
-    MOVF 0x49,0
-    IORWF 0x53,0
-    IORWF 0x57,0
-    MOVWF 0x58
 
-    ;ASIGNACION DE SALIDA PARA LEFT
-    
-    LEFT:
-    BTFSC 0x58,0
-    GOTO ONLEFT
-    GOTO OFFLEFT
+    ;RIGHT
+    RIGHT:
+    BTFSC 0x70,0
+    GOTO ONRIGHT
+    GOTO OFFRIGHT
 
-    ONLEFT:
+    ONRIGHT:
     BSF PORTD,5
     GOTO STOP
 
-    OFFLEFT:
+    OFFRIGHT:
     BCF PORTD,5
     GOTO STOP
-    
-;///////////////////////////////////////////////////////////////////////////////
-    
-    ;OPERACIONES AND PARA SALIDA STOP = S0'.S4'.S1'.S3'.S2' + S0.S4.S1.S3.S2
-    
-    ;OPERATION R59 = S0'.S4'.S1'.S3'.S2'
-    MOVF 0x52,0		  
-    ANDWF 0x27,0
-    MOVWF 0x59
-    
-    ;OPERATION R60 = S0.S4
-    MOVF 0x34,0		  
-    ANDWF 0x32,0
-    MOVWF 0x60
-    
-    ;OPERATION R61 = S0.S4.S1
-    MOVF 0x60,0		  
-    ANDWF 0x30,0
-    MOVWF 0x61
-    
-    ;OPERATION R62 = S0.S4.S1.S3
-    MOVF 0x61,0		  
-    ANDWF 0x28,0
-    MOVWF 0x62
-    
-    ;OPERATION R63 = S0.S4.S1.S3.S2
-    MOVF 0x62,0		  
-    ANDWF 0x26,0
-    MOVWF 0x63
-    
-    ;OPERACIONES OR PARA STOP
 
-    ;OPERATION R58 = S0'.S4'.S1'.S3'.S2' + S0.S4.S1.S3.S2
-    MOVF 0x59,0
-    IORWF 0x63,0
-    MOVWF 0x64
-    
-    ;ASIGNACION DE SALIDA PARA STOP
-    
+    ;STOP:
     STOP:
     BTFSC 0x64,0
     GOTO ONSTOP
@@ -406,62 +444,20 @@ INISYS:
     OFFSTOP:
     BCF PORTD,6
     GOTO LEFT
-    
-;///////////////////////////////////////////////////////////////////////////////
-    
-;OPERACIONES AND PARA SALIDA RIGHT = S0'.S1'.S3 + S0'.S4'.S1'.S3'.S2 + S0'.S4.S1'.S3'.S2'
-    
-    ;OPERATION R65 = S0'.S1'
-    MOVF 0x35,0		  
-    ANDWF 0x31,0
-    MOVWF 0x65
-    
-    ;OPERATION R66 = S0'.S1'.S3
-    MOVF 0x65,0		  
-    ANDWF 0x28,0
-    MOVWF 0x66
-    
-    ;OPERATION R67 = S0'.S4.S1'
-    MOVF 0x38,0		  
-    ANDWF 0x31,0
-    MOVWF 0x67
-    
-    ;OPERATION R68 = S0'.S4.S1'.S3'
-    MOVF 0x67,0		  
-    ANDWF 0x29,0
-    MOVWF 0x68
-    
-    ;OPERATION R69 = S0'.S4.S1'.S3'.S2
-    MOVF 0x68,0		  
-    ANDWF 0x26,0
-    MOVWF 0x69
-    
-    ;OPERACIONES OR PARA RIGHT
 
-    ;OPERATION R70 = S0'.S1'.S3 + S0'.S4'.S1'.S3'.S2 + S0'.S4.S1'.S3'.S2'
-    MOVF 0x66,0
-    IORWF 0x53,0
-    IORWF 0x69,0
-    MOVWF 0x70
-    
-    ;ASIGNACION DE SALIDA PARA STOP
-    
-    RIGHT:
-    BTFSC 0x70,0
-    GOTO ONRIGHT
-    GOTO OFFRIGHT
+    ;LEFT
+    LEFT:
+    BTFSC 0x58,0
+    GOTO ONLEFT
+    GOTO OFFLEFT
 
-    ONRIGHT:
+    ONLEFT:
     BSF PORTD,7
-    GOTO STOP
+    GOTO MAIN
 
-    OFFRIGHT:
+    OFFLEFT:
     BCF PORTD,7
-    GOTO STOP
+    GOTO MAIN
 
-;///////////////////////////////////////////////////////////////////////////////
-    
-    ; TESTEO
-    BCF TRISD, 0
-    
     END resetVec
+
